@@ -1,0 +1,259 @@
+[
+{
+    "model": "products.product",
+    "pk": 1,
+    "fields": {
+        "title": "iPhone X",
+        "slug": "iphone-x",
+        "description": "Latest Greatest iPhone X in Space Gray",
+        "price": "79999.00",
+        "active": true,
+        "featured": true,
+        "timestamp": "2018-02-16T20:45:55.255Z",
+        "default": 1,
+        "categories": [
+            1
+        ]
+    }
+},
+{
+    "model": "products.product",
+    "pk": 2,
+    "fields": {
+        "title": "Apple Macbook Pro MPXQ2",
+        "slug": "apple-macbook-pro-mpxq2",
+        "description": "Apple Macbook Pro MPXQ2 - 7th Gen Ci5 08GB 128GB SSD 13.3\"Retina Display Intel Iris Plus Graphics 640 Mac OSx Sierra (Space Gray - Mid 2017)",
+        "price": "149999.00",
+        "active": true,
+        "featured": false,
+        "timestamp": "2018-02-16T20:52:05.267Z",
+        "default": 5,
+        "categories": [
+            1,
+            5
+        ]
+    }
+},
+{
+    "model": "products.product",
+    "pk": 3,
+    "fields": {
+        "title": "Black Jacket",
+        "slug": "black-jacket",
+        "description": "Mens Black Jacket",
+        "price": "3999.00",
+        "active": true,
+        "featured": false,
+        "timestamp": "2018-02-16T20:52:41.808Z",
+        "default": 3,
+        "categories": [
+            3
+        ]
+    }
+},
+{
+    "model": "products.product",
+    "pk": 4,
+    "fields": {
+        "title": "Womens Jacket",
+        "slug": "womens-jacket",
+        "description": "Womens Jacket Gray",
+        "price": "4999.00",
+        "active": true,
+        "featured": false,
+        "timestamp": "2018-02-16T20:53:06.476Z",
+        "default": 2,
+        "categories": [
+            2
+        ]
+    }
+},
+{
+    "model": "products.product",
+    "pk": 5,
+    "fields": {
+        "title": "Hat",
+        "slug": "hat",
+        "description": "black hat",
+        "price": "499.00",
+        "active": true,
+        "featured": false,
+        "timestamp": "2018-02-25T13:18:59.369Z",
+        "default": 3,
+        "categories": [
+            3
+        ]
+    }
+},
+{
+    "model": "products.variation",
+    "pk": 1,
+    "fields": {
+        "product": 1,
+        "title": "256 GB",
+        "price": "139999.00",
+        "sell_price": "129999.00",
+        "active": true,
+        "inventory": 5
+    }
+},
+{
+    "model": "products.variation",
+    "pk": 2,
+    "fields": {
+        "product": 2,
+        "title": "Default",
+        "price": "149999.00",
+        "sell_price": null,
+        "active": true,
+        "inventory": null
+    }
+},
+{
+    "model": "products.variation",
+    "pk": 3,
+    "fields": {
+        "product": 3,
+        "title": "Default",
+        "price": "3999.00",
+        "sell_price": null,
+        "active": true,
+        "inventory": null
+    }
+},
+{
+    "model": "products.variation",
+    "pk": 4,
+    "fields": {
+        "product": 4,
+        "title": "Default",
+        "price": "4999.00",
+        "sell_price": null,
+        "active": true,
+        "inventory": null
+    }
+},
+{
+    "model": "products.variation",
+    "pk": 5,
+    "fields": {
+        "product": 1,
+        "title": "128 GB",
+        "price": "99999.00",
+        "sell_price": null,
+        "active": true,
+        "inventory": 6
+    }
+},
+{
+    "model": "products.variation",
+    "pk": 6,
+    "fields": {
+        "product": 1,
+        "title": "512 GB",
+        "price": "179999.00",
+        "sell_price": "169999.00",
+        "active": true,
+        "inventory": 3
+    }
+},
+{
+    "model": "products.variation",
+    "pk": 7,
+    "fields": {
+        "product": 5,
+        "title": "Default",
+        "price": "499.00",
+        "sell_price": null,
+        "active": true,
+        "inventory": null
+    }
+},
+{
+    "model": "products.productimage",
+    "pk": 1,
+    "fields": {
+        "product": 1,
+        "image": "products/iphone-x/iphone-x-None.png"
+    }
+},
+{
+    "model": "products.productimage",
+    "pk": 2,
+    "fields": {
+        "product": 1,
+        "image": "products/iphone-x/iphone-x-None.jpg"
+    }
+},
+{
+    "model": "products.productimage",
+    "pk": 3,
+    "fields": {
+        "product": 1,
+        "image": "products/iphone-x/iphone-x-None_Hw5t9lP.png"
+    }
+},
+{
+    "model": "products.productimage",
+    "pk": 5,
+    "fields": {
+        "product": 2,
+        "image": "products/apple-macbook-pro-mpxq2/apple-macbook-pro-mpxq2-None.jpg"
+    }
+},
+{
+    "model": "products.category",
+    "pk": 1,
+    "fields": {
+        "title": "Electronics",
+        "slug": "electronics",
+        "description": "",
+        "active": true,
+        "timestamp": "2018-02-16T20:46:19.021Z"
+    }
+},
+{
+    "model": "products.category",
+    "pk": 2,
+    "fields": {
+        "title": "Womens Clothing",
+        "slug": "womens-clothing",
+        "description": "",
+        "active": true,
+        "timestamp": "2018-02-16T20:46:37.110Z"
+    }
+},
+{
+    "model": "products.category",
+    "pk": 3,
+    "fields": {
+        "title": "Mens Clothing",
+        "slug": "mens-clothing",
+        "description": "",
+        "active": true,
+        "timestamp": "2018-02-16T20:46:51.224Z"
+    }
+},
+{
+    "model": "products.category",
+    "pk": 4,
+    "fields": {
+        "title": "Accessories",
+        "slug": "accessories",
+        "description": "",
+        "active": true,
+        "timestamp": "2018-02-16T20:47:05.231Z"
+    }
+},
+{
+    "model": "products.category",
+    "pk": 5,
+    "fields": {
+        "title": "Computing",
+        "slug": "computing",
+        "description": "",
+        "active": true,
+        "timestamp": "2018-02-16T20:47:18.018Z"
+    }
+}
+]

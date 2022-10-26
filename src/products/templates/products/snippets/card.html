@@ -1,0 +1,71 @@
+{% load static %}
+
+<div class="col-xs-12">
+    <div class="coupon-single panel t-center t-sm-left">
+		<div class="row row-sm-cell row-tb-0 row-rl-0">
+		    <div class="col-sm-5">
+		        <figure class="p-15">
+		        	{% if instance.productimage_set.count > 0 %}
+		        	<a href="{{ instance.get_absolute_url }}">
+		        		<img class="store-logo" src="{{ instance.productimage_set.first.image.url }}" alt={{ instance.title }}>
+		        	</a>
+		        	{% else %}
+		        	<a href="{{ instance.get_absolute_url }}">
+		        		<img class="store-logo" src="{% static 'img/no-image.jpg' %}" alt={{ instance.title }}>
+		        	</a>
+		        	{% endif %}
+		        </figure>
+		    </div>
+		    <!-- end col -->
+		    <div class="col-sm-7">
+		        <div class="panel-body">
+		            <ul class="deal-meta list-inline mb-10">
+		                <li class="color-muted"><i class="ico fa fa-map-marker mr-5"></i>Karachi</li>
+		                <li class="color-muted"><i class="ico lnr lnr-users mr-5"></i>425 Bought</li>
+		            </ul>
+		            <h5 class="deal-title mb-10">
+		             <a href="{{ instance.get_absolute_url }}">{{ instance.title }}</a>
+		          </h5>
+		            <p class="mb-15 color-muted font-12"><i class="lnr lnr-clock mr-10"></i>Expires in 1 day 30 hours</p>
+		            <div style="text-align: right">
+		            	{% include 'products/snippets/update-cart.html' with product=instance cart=cart %}
+		            </div>
+		            
+		            <div class="deal-price pos-r mb-15">
+                        <h3 class="price ptb-5 text-right">
+                        	{% if instance.variation_set.first.sell_price %}
+								<span class="price-sale">${{ instance.variation_set.first.price }}</span>${{ instance.variation_set.first.sell_price }}
+							{% else %}
+								{{ instance.variation_set.first.price }}
+							{% endif %}
+                        </h3>
+                    </div>
+		            <!-- <div class="showcode">
+		                <button class="show-code btn btn-sm btn-block" data-toggle="modal" data-target="#coupon_2">Show Code</button>
+		                <div class="coupon-hide">X455-17GT-OL58</div>
+		            </div> -->
+		        </div>
+		    </div>
+		    <!-- end col -->
+		</div>
+	</div>
+</div>
+
+
+
+
+
+<!-- <div class="card" style="width: 18rem;">
+	{% if instance.productimage_set.count > 0 %}
+		<a href="{{ instance.get_absolute_url }}">
+			<img class="card-img-top" src="{{ instance.productimage_set.first.image.url }}" alt={{ instance.title }}>
+		</a>
+	{% endif %}
+	<div class="card-body">
+	<h5 class="card-title">{{ instance.title }}</h5>
+	<p class="card-text">{{ instance.description|truncatewords:12 }}</p>
+	<a href="{{ instance.get_absolute_url }}" class="btn btn-primary">View</a>
+		{% include 'products/snippets/update-cart.html' with product=instance cart=cart %}
+	
+	</div>
+</div> -->
