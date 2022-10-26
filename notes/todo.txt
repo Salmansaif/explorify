@@ -1,0 +1,9 @@
+1. Update the cart page
+
+2. Authentication for merchant and user, merchant form for ad
+
+3. Payment Integration (sim sim)
+
+4. Generate qrcode after buying
+
+5. merchant will scan the barcode after delivering the service to customer.
