@@ -1,0 +1,20 @@
+<form class="form my-2 my-lg-0 search-form search-form" method='GET' action='{% url "search:query" %}'>
+    <div class="input-group">
+        <input type="text" class="form-control input-lg search-input" placeholder="Search Updeal ..." name="q" required="required" value="{{ request.GET.q }}">
+        <div class="input-group-btn">
+            <div class="input-group">
+                <select class="form-control input-lg search-select">
+                    <option>Select Your City</option>
+                    <option>Karachi</option>
+                    <option>Islamabad</option>
+                    <option>Lahore</option>
+                </select>
+                <div class="input-group-btn">
+                    <button type="submit" class="btn btn-lg btn-search btn-block">
+                        <i class="fa fa-search font-16"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
