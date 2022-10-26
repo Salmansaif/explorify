@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% url 'register' as register_url %}
+
+<div class="page-container ptb-60">
+    <div class="container">
+        <section class="sign-area panel p-40">
+            <h3 class="sign-title">Sign In <small>Or <a href="{{ register_url }}" class="color-green">Sign Up</a></small></h3>
+            <div class="row row-rl-0">
+                <div class="col-sm-6 col-md-7 col-left">
+                    <form class="p-40" method="POST"> {% csrf_token %}
+                        {% for f in form %}
+                            <div class="form-group">{{ f }}</div>
+                        {% endfor %}
+                        <div class="form-group">
+                            <a href="#" class="forgot-pass-link color-green">Forget Your Password?</a>
+                        </div>
+                        <div class="custom-checkbox mb-20">
+                            <input type="checkbox" id="remember_account" checked>
+                            <label class="color-mid" for="remember_account">Keep me signed in on this computer.</label>
+                        </div>
+                        <button type="submit" class="btn btn-block btn-lg">Sign In</button>
+                    </form>
+                    <span class="or">Or</span>
+                </div>
+                <div class="col-sm-6 col-md-5 col-right">
+                    <div class="social-login p-40">
+                        <div class="mb-20">
+                            <button class="btn btn-lg btn-block btn-social btn-facebook"><i class="fa fa-facebook-square"></i>Sign In with Facebook</button>
+                        </div>
+                        <div class="mb-20">
+                            <button class="btn btn-lg btn-block btn-social btn-twitter"><i class="fa fa-twitter"></i>Sign In with Twitter</button>
+                        </div>
+                        <div class="mb-20">
+                            <button class="btn btn-lg btn-block btn-social btn-google-plus"><i class="fa fa-google-plus"></i>Sign In with Google</button>
+                        </div>
+                        <div class="custom-checkbox mb-20">
+                            <input type="checkbox" id="remember_social" checked>
+                            <label class="color-mid" for="remember_social">Keep me signed in on this computer.</label>
+                        </div>
+                        <div class="text-center color-mid">
+                            Need an Account ? <a href="{{ register_url }}" class="color-green">Create Account</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+{% endblock %}

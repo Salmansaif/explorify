@@ -1,0 +1,188 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% url 'register' as register_url %}
+
+<div class="page-container ptb-60">
+    <div class="container">
+    	{% if not billing_profile %}
+        <section class="sign-area panel p-40">
+        	<h3 class="h3 mb-20 h-title">Checkout</h3>
+            <h3 class="sign-title">Sign In <small>Or <a href="{{ register_url }}" class="color-green">Sign Up</a></small></h3>
+            <div class="row row-rl-0">
+                <div class="col-sm-6 col-md-7 col-left">
+                    <div class="p-40">
+                    	{% include 'accounts/snippets/form.html' with form=login_form next_url=request.build_absolute_uri %}
+                        <div class="form-group">
+                            <a href="#" class="forgot-pass-link color-green">Forget Your Password?</a>
+                        </div>
+                        <div class="custom-checkbox mb-20">
+                            <input type="checkbox" id="remember_account" checked>
+                            <label class="color-mid" for="remember_account">Keep me signed in on this computer.</label>
+                        </div>
+                        <h3 class="sign-title">Continue as Guest</h3>
+	            		{% url "guest_register" as guest_register_url %}
+	            		{% include 'accounts/snippets/form.html' with form=guest_form next_url=request.build_absolute_uri action_url=guest_register_url %}
+                    </div>
+                    <span class="or">Or</span>
+                </div>
+                <div class="col-sm-6 col-md-5 col-right">
+                    <div class="social-login p-40">
+                        <div class="mb-20">
+                            <button class="btn btn-lg btn-block btn-social btn-facebook"><i class="fa fa-facebook-square"></i>Sign In with Facebook</button>
+                        </div>
+                        <div class="mb-20">
+                            <button class="btn btn-lg btn-block btn-social btn-twitter"><i class="fa fa-twitter"></i>Sign In with Twitter</button>
+                        </div>
+                        <div class="mb-20">
+                            <button class="btn btn-lg btn-block btn-social btn-google-plus"><i class="fa fa-google-plus"></i>Sign In with Google</button>
+                        </div>
+                        <div class="custom-checkbox mb-20">
+                            <input type="checkbox" id="remember_social" checked>
+                            <label class="color-mid" for="remember_social">Keep me signed in on this computer.</label>
+                        </div>
+                        <div class="text-center color-mid">
+                            Need an Account ? <a href="{{ register_url }}" class="color-green">Create Account</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+		{% else %}
+			{% if not object.shipping_address %}
+				<div class="row row-rl-10 row-tb-20">
+                    <div class="page-content col-xs-12 col-sm-8 col-md-9">
+
+                        <!-- Checkout Area -->
+                        <section class="section checkout-area panel prl-30 pt-20 pb-40">
+                            <h2 class="h2 mb-20 h-title">Shipping Information</h2>
+                            <div class="mb-30">
+	                            {% url "checkout_address_create" as checkout_address_create %}
+								{% include 'addresses/form.html' with form=address_form next_url=request.build_absolute_uri action_url=checkout_address_create %}
+							</div>
+                        </section>
+                        <!-- End Checkout Area -->
+
+                    </div>
+
+
+                    <div class="page-sidebar col-xs-12 col-sm-4 col-md-3">
+
+                        <!-- Cart Sidebar -->
+                        <aside class="sidebar blog-sidebar">
+                        	<div class="row row-tb-10">
+                                <div class="col-xs-12">
+                                    <!-- Recent Posts -->
+                                    <div class="widget checkout-widget panel p-20">
+                                        <div class="widget-body">
+					                    	{% url "checkout_address_reuse" as checkout_address_reuse %}
+											{% include 'addresses/prev_addresses.html' with address_qs=address_qs next_url=request.build_absolute_uri action_url=checkout_address_reuse %}
+										</div>
+									</div>
+								</div>
+							</div>
+                        	
+                            <div class="row row-tb-10">
+                                <div class="col-xs-12">
+                                    <!-- Recent Posts -->
+                                    <div class="widget checkout-widget panel p-20">
+                                        <div class="widget-body">
+                                            <table class="table mb-15">
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="color-mid">Total products</td>
+                                                        <td>Rs.{{ object.cart.total }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="color-mid">Shipping</td>
+                                                        <td>20%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="color-mid">Total tax</td>
+                                                        <td>Rs.0.00</td>
+                                                    </tr>
+                                                    <tr class="font-15">
+                                                        <td class="color-mid">Total</td>
+                                                        <td class="color-green">Rs.{{ object.total }}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <a href="{% url 'cart:home' %}" class="btn btn-info btn-block btn-sm">Edit Cart</a>
+                                        </div>
+                                    </div>
+                                    <!-- End Recent Posts -->
+                                </div>
+                            </div>
+                        </aside>
+                        <!-- End Cart Sidebar -->
+                    </div>
+                </div>
+			{% else %}
+				<div class="row row-rl-10 row-tb-20">
+                    <div class="page-content col-xs-12 col-sm-8 col-md-9">
+
+                        <!-- Checkout Area -->
+                        <section class="section checkout-area panel prl-30 pt-20 pb-40">
+                            <h2 class="h3 mb-20 h-title">Finalize Checkout</h2>
+                            <div class="mb-20">
+	                            <p>Cart Items: {% for product in object.cart.products.all %}{{ product }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+								<p>Shipping Address: {{ object.shipping_address.get_address }}</p>
+								<p>Cart Total: {{ object.cart.total }}</p>
+								<p>Shipping Total: {{ object.shipping_total }}</p>
+								<p>Order Total: {{ object.total }}</p>
+								<form class="form" method="POST" action="">{% csrf_token %}
+									<button class="btn btn-lg btn-rounded mr-10" type="Submit">Checkout</button>
+								</form>
+							</div>
+                        </section>
+                        <!-- End Checkout Area -->
+
+                    </div>
+                    <div class="page-sidebar col-xs-12 col-sm-4 col-md-3">
+
+                        <!-- Cart Sidebar -->
+                        <aside class="sidebar blog-sidebar">
+                            <div class="row row-tb-10">
+                                <div class="col-xs-12">
+                                    <!-- Recent Posts -->
+                                    <div class="widget checkout-widget panel p-20">
+                                        <div class="widget-body">
+                                            <table class="table mb-15">
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="color-mid">Total products</td>
+                                                        <td>Rs.{{ object.cart.total }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="color-mid">Shipping</td>
+                                                        <td>20%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="color-mid">Total tax</td>
+                                                        <td>Rs.0.00</td>
+                                                    </tr>
+                                                    <tr class="font-15">
+                                                        <td class="color-mid">Total</td>
+                                                        <td class="color-green">Rs.{{ object.total }}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <a href="{% url 'cart:home' %}" class="btn btn-info btn-block btn-sm">Edit Cart</a>
+                                        </div>
+                                    </div>
+                                    <!-- End Recent Posts -->
+                                </div>
+                            </div>
+                        </aside>
+                        <!-- End Cart Sidebar -->
+                    </div>
+                </div>
+			{% endif %}
+    	{% endif %}
+    </div>
+</div>
+
+
+
+{% endblock %}

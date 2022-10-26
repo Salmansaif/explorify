@@ -1,0 +1,25 @@
+<form method="POST" action='{% if action_url %}{{ action_url }}{% else %}{% url "login" %}{% endif %}'> {% csrf_token %}
+	{% if next_url %}
+		<input type="hidden" name="next" value="{{ next_url }}" />
+	{% endif %}
+	{% for field in form %}
+		{% if forloop.counter == 3 %}
+		<div class="row">
+		{% endif %}
+		{% if forloop.counter > 2 %}
+		<div class="col-md-6">
+		{% endif %}
+		<div class="form-group">
+			<label>{{ field.label }}</label>
+			{{ field }}
+		</div>
+		{% if forloop.counter > 2 %}
+		</div>
+		{% endif %}
+		{% if forloop.counter == 6 %}
+		</div>
+		{% endif %}
+	{% endfor %}
+	<button type="submit" class="btn btn-lg btn-rounded mr-10">Continue</button>
+	<a href="#" class="btn btn-lg btn-warning btn-rounded">Cancel Order</a>
+</form>

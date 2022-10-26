@@ -1,0 +1,15 @@
+<form method="POST" action="{{ action_url }}"> {% csrf_token %}
+	{% if next_url %}
+		<input type="hidden" name="next" value="{{ next_url }}" />
+	{% endif %}
+
+	{% for address in address_qs %}
+		<div class="custom-radio mb-10">
+			<input id="address-{{ address.id }}" type="radio" name="shipping_address" value="{{ address.id }}"/>
+			<label for="address-{{ address.id }}" class="color-mid">
+				{{ address.address_line_1 }}
+			</label>
+		</div>
+	{% endfor %}
+	<button type="submit" class="btn btn-sm btn-rounded mr-10">Use Address</button>
+</form>

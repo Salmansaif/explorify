@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="page-container">
+    <div class="container">
+        <div class="cart-area ptb-60">
+            <div class="container">
+                <div class="cart-wrapper">
+                    <h3 class="h-title mb-30 t-uppercase">My Cart</h3>
+                    {% if cart.products.exists %}
+                    <table id="cart_list" class="cart-list mb-30">
+                        <thead class="panel t-uppercase">
+                            <tr>
+                                <th>Product name</th>
+                                <th>Unit price</th>
+                                <th>Quantity</th>
+                                <th>Sub total</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        	{% for product in cart.products.all %}
+                            <tr class="panel alert product-row">
+                                <td>
+                                    <div class="media-left is-hidden-sm-down">
+                                        <figure class="product-thumb">
+                                            <img src="{% static 'img/product_01.jpg' %}" alt="product">
+                                        </figure>
+                                    </div>
+                                    <div class="media-body valign-middle">
+                                        <h6 class="title mb-15 t-uppercase"><a href="{{ product.get_absolute_url }}">{{ product.title }}</a></h6>
+                                        <div class="type font-12"><span class="t-uppercase">Desc : </span>{{ product.description|truncatewords:"20" }}</div>
+                                    </div>
+                                </td>
+                                <td>{{ product.price }}</td>
+                                <td>
+                                    <input class="quantity-label" type="number" value="02">
+                                </td>
+                                <td>
+                                    <div class="sub-total">{{ product.price }}</div>
+                                </td>
+                                <td>
+                                	{% include 'carts/snippets/remove-product.html' with product_id=product.id %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="cart-item-remove-form" style="display: none;">
+						{% include 'carts/snippets/remove-product.html' %}
+					</div> 
+                    <div class="cart-price">
+                        <h5 class="t-uppercase mb-20">Cart total</h5>
+                        <ul class="panel mb-20">
+                            <li>
+                                <div class="item-name">
+                                    Subtotal
+                                </div>
+                                <div class="cart-subtotal price">
+                                    Rs.{{ cart.subtotal }}
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item-name">
+                                    Shipping
+                                </div>
+                                <div class="price">
+                                    20%
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item-name">
+                                    <strong class="t-uppercase">Order total</strong>
+                                </div>
+                                <div class="cart-total price">
+                                    <span>Rs.{{ cart.total }}</span>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="t-right">
+                            <a href="{% url 'cart:checkout' %}" class="btn btn-rounded btn-lg">CHECKOUT</a>
+                        </div>
+                    </div>
+                    {% else %}
+						<p class="lead">Cart is empty, Go shop some!</p>
+					{% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
